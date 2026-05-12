@@ -1,11 +1,11 @@
 "use client";
 
 import React from 'react';
+import API_URL from '../lib/api';
 
 export default function LoginPage() {
   const handleGoogleLogin = () => {
-    // Redirect to backend auth via proxy to ensure same-origin cookies
-    window.location.href = 'email-scheduler-production-a254.up.railway.app/auth/google';
+    window.location.href = `${API_URL}/auth/google`;
   };
 
   return (

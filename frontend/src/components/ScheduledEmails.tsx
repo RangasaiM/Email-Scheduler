@@ -1,13 +1,14 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
+import API_URL from '../lib/api';
 
 export default function ScheduledEmails({ refreshTrigger }: { refreshTrigger?: any }) {
   const [emails, setEmails] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:5000/emails/scheduled', { credentials: 'include' })
+    fetch(`${API_URL}/emails/scheduled`, { credentials: 'include' })
       .then(async res => {
         if (!res.ok) {
           const text = await res.text();
@@ -49,7 +50,11 @@ export default function ScheduledEmails({ refreshTrigger }: { refreshTrigger?: a
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{email.subject}</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{new Date(email.scheduledTime).toLocaleString()}</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm">
-                <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${email.status === 'scheduled' || email.status === 'queued' ? 'bg-yellow-100 text-yellow-800' : 'bg-gray-100 text-gray-800'}`}>
+                <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                  email.status === 'scheduled' || email.status === 'queued'
+                    ? 'bg-yellow-100 text-yellow-800'
+                    : 'bg-gray-100 text-gray-800'
+                }`}>
                   {email.status}
                 </span>
               </td>

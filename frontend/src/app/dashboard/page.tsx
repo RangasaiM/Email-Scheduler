@@ -6,17 +6,17 @@ import Header from '../../components/Header';
 import ScheduledEmails from '../../components/ScheduledEmails';
 import SentEmails from '../../components/SentEmails';
 import ComposeEmail from '../../components/ComposeEmail';
+import API_URL from '../../lib/api';
 
 export default function Dashboard() {
   const router = useRouter();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState('scheduled'); // scheduled | sent
+  const [activeTab, setActiveTab] = useState('scheduled');
   const [showCompose, setShowCompose] = useState(false);
 
   useEffect(() => {
-    // Fetch user profile to check auth
-    fetch('email-scheduler-production-a254.up.railway.app/auth/me', { credentials: 'include' })
+    fetch(`${API_URL}/auth/me`, { credentials: 'include' })
       .then(res => {
         if (!res.ok) throw new Error('Unauthorized');
         return res.json();
@@ -53,19 +53,21 @@ export default function Dashboard() {
             <nav className="-mb-px flex">
               <button
                 onClick={() => setActiveTab('scheduled')}
-                className={`w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm ${activeTab === 'scheduled'
+                className={`w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm ${
+                  activeTab === 'scheduled'
                     ? 'border-blue-500 text-blue-600'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                  }`}
+                }`}
               >
                 Scheduled Emails
               </button>
               <button
                 onClick={() => setActiveTab('sent')}
-                className={`w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm ${activeTab === 'sent'
+                className={`w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm ${
+                  activeTab === 'sent'
                     ? 'border-blue-500 text-blue-600'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                  }`}
+                }`}
               >
                 Sent Emails
               </button>

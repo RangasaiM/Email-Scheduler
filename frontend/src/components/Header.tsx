@@ -1,10 +1,11 @@
 "use client";
 
 import React from 'react';
+import API_URL from '../lib/api';
 
 export default function Header({ user }: { user: any }) {
   const handleLogout = () => {
-    fetch('http://localhost:5000/auth/logout', { method: 'POST', credentials: 'include' })
+    fetch(`${API_URL}/auth/logout`, { method: 'POST', credentials: 'include' })
       .then(() => {
         window.location.href = '/login';
       });
@@ -20,7 +21,7 @@ export default function Header({ user }: { user: any }) {
             {user.avatar && (
               <img src={user.avatar} alt="Avatar" className="w-8 h-8 rounded-full border" />
             )}
-            <button 
+            <button
               onClick={handleLogout}
               className="text-sm text-red-600 hover:text-red-800"
             >

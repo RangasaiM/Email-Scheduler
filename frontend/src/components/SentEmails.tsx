@@ -1,13 +1,14 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
+import API_URL from '../lib/api';
 
 export default function SentEmails() {
   const [emails, setEmails] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:5000/emails/sent', { credentials: 'include' })
+    fetch(`${API_URL}/emails/sent`, { credentials: 'include' })
       .then(async res => {
         if (!res.ok) {
           const text = await res.text();
@@ -47,9 +48,15 @@ export default function SentEmails() {
             <tr key={email.id}>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{email.recipientEmail}</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{email.subject}</td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{email.sentTime ? new Date(email.sentTime).toLocaleString() : 'N/A'}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                {email.sentTime ? new Date(email.sentTime).toLocaleString() : '—'}
+              </td>
               <td className="px-6 py-4 whitespace-nowrap text-sm">
-                <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${email.status === 'sent' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                  email.status === 'sent'
+                    ? 'bg-green-100 text-green-800'
+                    : 'bg-red-100 text-red-800'
+                }`}>
                   {email.status}
                 </span>
               </td>
