@@ -6,7 +6,7 @@ import Header from '../../components/Header';
 import ScheduledEmails from '../../components/ScheduledEmails';
 import SentEmails from '../../components/SentEmails';
 import ComposeEmail from '../../components/ComposeEmail';
-import API_URL from '../../lib/api';
+import API_URL from '@/lib/api';
 
 export default function Dashboard() {
   const router = useRouter();

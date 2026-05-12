@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import API_URL from '../lib/api';
+import API_URL from '@/lib/api';
 
 export default function LoginPage() {
   const handleGoogleLogin = () => {

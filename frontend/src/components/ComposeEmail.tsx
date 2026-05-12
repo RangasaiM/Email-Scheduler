@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import API_URL from '../lib/api';
+import API_URL from '@/lib/api';
 
 export default function ComposeEmail({ onClose }: { onClose: () => void }) {
   const [subject, setSubject] = useState('');

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import API_URL from '../lib/api';
+import API_URL from '@/lib/api';
 
 export default function ScheduledEmails({ refreshTrigger }: { refreshTrigger?: any }) {
   const [emails, setEmails] = useState<any[]>([]);
